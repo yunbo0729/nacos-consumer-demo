@@ -1,0 +1,31 @@
+server:
+  port: 10010
+
+spring:
+  application:
+    name: nacos-order-consumer #微服务名
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      config:
+        namespace: 0b416a78-7cfb-445c-926d-b8f0daf7ccc7
+        #group: DEV_GROUP
+        #prefix: dbfile
+        file-extension: yaml
+        extension-configs:
+          - data-id: nacos-provider-demo-dev.yaml
+            group: DEV_GROUP
+            refresh: true
+
+          - data-id: dbfile-dev.yaml
+            group: DEV_GROUP
+            refresh: true
+        server-addr: 49.234.14.112:8848
+      discovery:
+        server-addr: 49.234.14.112:8848
+        namespace: 0b416a78-7cfb-445c-926d-b8f0daf7ccc7
+
+#消费者将要去访问的微服务名称(注册成功进nacos的微服务提供者)
+service-url:
+  nacos-user-service: http://nacos-provider-demo
